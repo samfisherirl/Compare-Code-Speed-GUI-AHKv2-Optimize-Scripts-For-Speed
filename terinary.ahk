@@ -2,18 +2,18 @@
 #Requires Autohotkey v2.0
 /*
 credits:
-original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
-lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
+    lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
 
 ahkv1 notes:
-Ternarry:        2.828439
-if/else:         3.931492
+    Ternarry:        2.828439
+    if/else:         3.931492
 
 ahkv2 results on i9 laptop (rounded, try yourself for granular results):
-- result1: 1.171
-- result2: 1.112
+    - result1: 1.171
+    - result2: 1.112
 */
 global lcnt := 10000000
 global VarA := "Hello"
