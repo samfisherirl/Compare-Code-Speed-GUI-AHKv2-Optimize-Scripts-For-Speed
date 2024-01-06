@@ -50,4 +50,4 @@ Results2:= A_tickcount - start
 
 MsgBox("result1: " Results1 "`nresult2: " Results2)
 FileAppend("`n========================" A_ScriptName "========================`n"
-    "result1: " Results1 "`nresult2: " Results2 "`n", "Log.txt")
+	"result1: " Results1 "`nresult2: " Results2 "`n", "Log.txt")
