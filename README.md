@@ -1,6 +1,13 @@
 # Optimize-AHKv2-Code-for-Speed
 Optimize AHKv2 Code for Speed
 
+Credits:
+- original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+- WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+- jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
+- lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+
+
 I'm not going to try to rewrite the original post text, a lot of it is great and should be read from the source https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
 Many of the conventions such as #NoEnv and #SetBatchLines are defunct, but the rest is very valuable. 
 I have restructured the tests for ahkv2. 
