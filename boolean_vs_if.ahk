@@ -2,35 +2,35 @@
 #Requires Autohotkey v2
 /*
 credits:
-original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
-lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
+    lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
 
 ahkv1 notes:
-a few tips for IF checking of Boolean values
-Tested on a Core2Quad Q6600 system.
+    a few tips for IF checking of Boolean values
+    Tested on a Core2Quad Q6600 system.
 
 
-if VariableName
-Seems to be the fastest way to check if a variable is True
+    if VariableName
+    Seems to be the fastest way to check if a variable is True
 
 
-if VariableName = 0
-Is the fastest way to check if a variable is false however it does not take into account of the variable is not set, aka empty. The IF commands does not get activaged if the variable is not set/empty
+    if VariableName = 0
+    Is the fastest way to check if a variable is false however it does not take into account of the variable is not set, aka empty. The IF commands does not get activaged if the variable is not set/empty
 
-if VariableName <> 1
-is almost as fast and an empty variable is considere false ( aka the IF settings get activated) just like if it contained a 0
+    if VariableName <> 1
+    is almost as fast and an empty variable is considere false ( aka the IF settings get activated) just like if it contained a 0
 
-if Not VariableName
-Seems to be slower than both of the two above
+    if Not VariableName
+    Seems to be slower than both of the two above
 
 ahkv2 results on i9 laptop (rounded, try yourself for granular results):
-test1 time: 0.038134300000000003
-test2 time: 0.038739900000000001
-test3 time: 0.026265299999999998
-test4 time: 0.071452199999999993
-test5 time: 0.1123638
+    test1 time: 0.038134300000000003
+    test2 time: 0.038739900000000001
+    test3 time: 0.026265299999999998
+    test4 time: 0.071452199999999993
+    test5 time: 0.1123638
 */
 ; =========================================================================================================
 x := false
