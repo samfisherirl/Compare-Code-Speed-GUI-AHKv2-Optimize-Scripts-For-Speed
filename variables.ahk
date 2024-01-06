@@ -2,23 +2,23 @@
 #Requires Autohotkey v2
 /*
 credits:
-original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
-jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
-lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    WAZAAAAA https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+    jNizM  https://www.autohotkey.com/boards/memberlist.php?mode=viewprofile&u=75
+    lexikos https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
 
 ahkv1 notes:
-Performance: In v1.0.48+, the comma operator is usually faster than writing
-separate expressions, especially when assigning one variable to another
-(e.g. x:=y, a:=b). Performance continues to improve as more and more
-expressions are combined into a single expression; for example, it may be
-35% faster to combine five or ten simple expressions into a single expression.
+    Performance: In v1.0.48+, the comma operator is usually faster than writing
+    separate expressions, especially when assigning one variable to another
+    (e.g. x:=y, a:=b). Performance continues to improve as more and more
+    expressions are combined into a single expression; for example, it may be
+    35% faster to combine five or ten simple expressions into a single expression.
 
 ahkv2 results on i9 laptop (rounded, try yourself for granular results):
-- test1: 0.09
-- test2: 0.11
-- test3: 0.15
-- test4: 0.31
+    - test1: 0.09
+    - test2: 0.11
+    - test3: 0.15
+    - test4: 0.31
 */
 ; =========================================================================================================
 
