@@ -49,16 +49,18 @@ test3 := QPC(0)
 
 
 Loop 1000000
-    t3a := 1
-    ,t3b := 1
-    ,t3c := 1
-    ,t3d := 1
-    ,t3e := 1
-    ,t3f := 1
-    ,t3g := 1
-    ,t3h := 1
-    ,t3i := 1
-    ,t3j := 1
+{
+t3a := 1
+,t3b := 1
+,t3c := 1
+,t3d := 1
+,t3e := 1
+,t3f := 1
+,t3g := 1
+,t3h := 1
+,t3i := 1
+,t3j := 1
+}
 test4 := QPC(0)
 
 MsgBox("test1 time: "  test1 "`n" "test2 time: " test2 "`n" "test3 time: " test3 "`n" "test4 time: " test4)

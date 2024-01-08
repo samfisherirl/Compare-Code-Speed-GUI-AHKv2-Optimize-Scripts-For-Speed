@@ -32,19 +32,19 @@ var_Input2:=456
 
 start:=A_tickcount
 Loop 9999999
-	{
+{
 	X:= (2 * var_Input1 ) -1
 	Y:= (3 / var_Input2 ) +7
 	Z:= X / Y
-	}
+}
 Results1:=A_tickcount - start
 
 
 start:=A_tickcount
 Loop 9999999
-	{
+{
 	Z:= ((2 * var_Input1 ) -1) / ((3 / var_Input2 ) +7)
-	}
+}
 Results2:= A_tickcount - start
 
 
