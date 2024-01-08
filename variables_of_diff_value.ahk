@@ -37,7 +37,7 @@ Loop 1000000
 {
     t3a := 1,t3b := 2,t3c := 3,t3d := 4,t3e := 5,t3f := 6,t3g := 7,t3h := 8,t3i := 9,t3j := 0
 }
-test2 := QPC(0)
+test2 := QPC(0), QPC(1)
 
 
 Loop 1000000
