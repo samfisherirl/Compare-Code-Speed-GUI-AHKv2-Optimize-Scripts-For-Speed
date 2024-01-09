@@ -14,15 +14,49 @@ test4 time: 0.94646280000000005
 ========================boolean_if.ahk========================
 test1 time: 0.036670899999999999
 test2 time: 0.39751910000000001
+ 
+========================variables_of_diff_value.ahk========================
+test1 time: 0.090797100000000006
+test2 time: 0.16347449999999999
+test3 time: 0.16568930000000001
+test1.5 time: 0.18615370000000001
+test2.5 time: 0.17278389999999999
+test3.5 time: 0.12749569999999999
+test1 average time: 0.1091464
+test1 average time: 0.16812919999999998
+test3 average time: 0.17592150000000001
 
-========================illformed_variables.ahk========================
-test1 time: 0.053064
-test2 time: 0.38562249999999998
-test3 time: 0.3975166
-test4 time: 0.042644300000000003
+========================variables_of_diff_value.ahk========================
+test1 time: 0.088705900000000004
+test2 time: 0.26589760000000001
+test3 time: 0.22410759999999999
+test1.5 time: 0.1833176
+test2.5 time: 0.20141999999999999
+test3.5 time: 0.1004726
+test1 average time: 0.09458925
+test1 average time: 0.2336588
+test3 average time: 0.20371259999999999
 
-========================snaked_results.ahk========================
-test1 time: 0.038632100000000003
-test2 time: 0.35617670000000001
-test3 time: 0.44291530000000001
-test4 time: 0.051584499999999998
+========================variables_of_diff_value.ahk========================
+test1 time: 0.090471599999999999
+test2 time: 0.17190359999999999
+test3 time: 0.1754994
+test3.5 time: 0.16625860000000001
+test2.5 time: 0.16575889999999999
+test1.5 time: 0.088384199999999996
+
+test1 average time: 0.089427900000000005
+test1 average time: 0.16883124999999999
+test3 average time: 0.170879
+
+========================variables_of_diff_value.ahk========================
+test1 time: 0.14522760000000001
+test2 time: 0.25794400000000001
+test3 time: 0.16886309999999999
+test3.5 time: 0.16912969999999999
+test2.5 time: 0.17471629999999999
+test1.5 time: 0.090348100000000001
+
+test1 average time: 0.11778785
+test1 average time: 0.21633015
+test3 average time: 0.16899639999999999
