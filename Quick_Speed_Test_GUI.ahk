@@ -5,10 +5,10 @@
 ;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter
 ;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
 
-tester := constructGUI()
-; temp := A_Temp "\code_to_run.ahk"
 temp := A_ScriptDir "\code_to_run.ahk"
 ahk := A_AhkPath
+tester := constructGUI()
+; temp := A_Temp "\code_to_run.ahk"
 
 constructGUI()
 {
