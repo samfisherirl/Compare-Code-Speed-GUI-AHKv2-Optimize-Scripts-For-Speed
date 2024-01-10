@@ -1,4 +1,4 @@
-﻿
+
 #Requires Autohotkey v2
 #SingleInstance Force
 ;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
@@ -110,8 +110,8 @@ ExitApp()
 
 QPC(R := 0)
 {
-    static P := 0, F := 0, Q := DllCall("QueryPerformanceFrequency", "Int64P", &F)
-    return ! DllCall("QueryPerformanceCounter", "Int64P", &Q) + (R ? (P := Q) / F : (Q - P) / F) 
+	static P := 0, F := 0, Q := DllCall("QueryPerformanceFrequency", "Int64P", &F)
+	return ! DllCall("QueryPerformanceCounter", "Int64P", &Q) + (R ? (P := Q) / F : (Q - P) / F) 
 }
 f1()
 {
@@ -152,26 +152,6 @@ blackGuiCtrl(params*)
 			continue
 		}
 	}
-}
-
-mcColorFunc()
-{
-	return mcColors := {
-		MCSC_BACKGROUND: 0,
-		MCSC_TEXT: 1,
-		MCSC_TITLEBK: 2,
-		MCSC_TITLETEXT: 3,
-		MCSC_MONTHBK: 4,
-		MCSC_TRAILINGTEXT: 5
-	}
-}
-GetFont(options, fontName)
-{
-	myGUI := Gui()
-	myGUI.SetFont(options, fontName)
-	hFont := SendMessage(WM_GETFONT := 0x31, , , myGUI.AddText())
-	myGUI.Destroy()
-	return hFont
 }
 
 
