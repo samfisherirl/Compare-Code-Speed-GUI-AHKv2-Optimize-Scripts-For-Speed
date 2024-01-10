@@ -50,9 +50,7 @@ constructGUI()
 		try{
 			FileOpen(temp, "w").Write(FileContents(code1.value, code2.value, code3.value, Round(loops.value / 2)))
 			Run(ahk ' "' temp '"')
-		} catch as e {
-			Msgbox e.Message
-		}
+		} 
 		while not (FileExist(A_ScriptDir "\results.txt"))
 			Sleep 5
 		contents := FileOpen(A_ScriptDir "\results.txt", "r").Read()
