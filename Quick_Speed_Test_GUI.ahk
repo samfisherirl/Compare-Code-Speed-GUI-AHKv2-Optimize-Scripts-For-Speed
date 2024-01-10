@@ -7,6 +7,16 @@ ahk := A_AhkPath
 tester := constructGUI()
 ; temp := A_Temp "\code_to_run.ahk"
 
+;indentation 
+
+Tab::
+{
+	if WinActive("ahk_id " tester.hWnd) {
+		Loop 4
+			SendInput "{Space}"
+		return
+} }
+
 constructGUI()
 {
 	w := 550
@@ -45,6 +55,7 @@ constructGUI()
 	tester.Title := "AHKv2 Quick Speed Test"
 	darkmode(tester)
 	tester.Show("w" w " h" h+70)
+	
 	runbtn_click(*)
 	{
 		try{
