@@ -1,9 +1,6 @@
 
 #Requires Autohotkey v2
 #SingleInstance Force
-;AutoGUI 2.5.8 creator: Alguimist autohotkey.com/boards/viewtopic.php?f=64&t=89901
-;AHKv2converter creator: github.com/mmikeww/AHK-v2-script-converter
-;Easy_AutoGUI_for_AHKv2 github.com/samfisherirl/Easy-Auto-GUI-for-AHK-v2
 
 temp := A_ScriptDir "\code_to_run.ahk"
 ahk := A_AhkPath
@@ -14,7 +11,6 @@ constructGUI()
 {
 	w := 550
 	h := 800
-
 	tester := Gui()
 	darkmode(tester)
 	tester.SetFont("s15 cWhite", "Consolas")
@@ -50,8 +46,12 @@ constructGUI()
 	tester.Show("w" w " h" h)
 	runbtn_click(*)
 	{
-		FileOpen(temp, "w").Write(FileContents(code1.value, code2.value, code3.value, loops.value))
-		Run(ahk ' "' temp '"')
+		try{
+			FileOpen(temp, "w").Write(FileContents(code1.value, code2.value, code3.value, Round(loops.value / 2)))
+			Run(ahk ' "' temp '"')
+		} catch as e {
+			Msgbox e.Message
+		}
 		while not (FileExist(A_ScriptDir "\results.txt"))
 			Sleep 5
 		contents := FileOpen(A_ScriptDir "\results.txt", "r").Read()
