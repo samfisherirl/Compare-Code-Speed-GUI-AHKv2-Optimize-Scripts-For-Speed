@@ -1,5 +1,6 @@
 # Optimize-AHKv2-Code-for-Speed
 Optimize AHKv2 Code for Speed
+![image](https://github.com/samfisherirl/AHKv2-quick-speed-test/assets/98753696/2b312d4d-466d-4b46-a4a0-ce74d2628166)
 
 Credits:
 - original post https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
