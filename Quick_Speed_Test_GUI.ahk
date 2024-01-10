@@ -10,40 +10,41 @@ tester := constructGUI()
 constructGUI()
 {
 	w := 550
-	h := 800
+	h := 550
 	tester := Gui()
 	darkmode(tester)
 	tester.SetFont("s15 cWhite", "Consolas")
 	tester.BackColor := "232b2b"
 	T := tester.Add("Tab3", "x20 y8 w" w - 40 " h" h - (h / 3), ["Code 1", "Code 2", "Code 3"])
+	tabH := h - (h / 3) - 55
 	T.UseTab(1)
-	code1 := tester.Add("Edit", "x32 y48 w" w - 65 " h" h - (h / 3) - 55)
+	code1 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab(2)
-	code2 := tester.Add("Edit", "x32 y48 w" w - 65 " h" h - (h / 3) - 55)
+	code2 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab(3)
-	code3 := tester.Add("Edit", "x32 y48 w" w - 65 " h" h - (h / 3) - 55)
+	code3 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab()
 	resultsY := Round(16 + (h - Round(h / 3)))
 	resultsw := Round((w - (w / 3))) -20
-	tester.Add("GroupBox", "x20 y" resultsY " w" w - 40 " h242", "Results")
+	tester.Add("GroupBox", "x20 y" resultsY " w" w - 40 " h222", "Results")
 	runbtn := tester.Add("Button", "x44 y" resultsY+30 " ", "Run it")
 	clear := tester.Add("Button", "x+15 y" resultsY + 30 " ", "Clear")
 	tester.Add("Text", "x+15 y" resultsY+ 35 "", "Loops x")
-	loops := tester.Add("Edit", "x+1 y" resultsY +35 " w100", "1000")
+	loops := tester.Add("Edit", "x+1 y" resultsY +35 " w100", "50")
 	resultsY += 90
 	tester.Add("Text", "x44 y" resultsY " w120 h23 +0x200", "Result 1")
 	results1 := tester.Add("Edit", "x+5 y" resultsY " w" resultsw " ", "")
 	tester.Add("Text", "x44 y+11 w120 h23 +0x200", "Result 2")
 	results2 := tester.Add("Edit", "x+5 yp w" resultsw "  ", "")
-	tester.Add("Text", "x44 y+20 w120 h23 +0x200", "Result 3")
-	results3 := tester.Add("Edit", "x+5  w" resultsw "  ", "")
+	tester.Add("Text", "x44 y+11 w120 h23 +0x200", "Result 3")
+	results3 := tester.Add("Edit", "x+5 yp w" resultsw "  ", "")
 	
 	tester.OnEvent('Close', (*) => ExitApp())
 	runbtn.OnEvent('Click', runbtn_click)
 	clear.OnEvent('Click', clear_click)
 	tester.Title := "AHKv2 Quick Speed Test"
 	darkmode(tester)
-	tester.Show("w" w " h" h)
+	tester.Show("w" w " h" h+70)
 	runbtn_click(*)
 	{
 		try{
@@ -57,7 +58,12 @@ constructGUI()
 		contents := FileOpen(A_ScriptDir "\results.txt", "r").Read()
 		results := StrSplit(contents, "&&&" )
 		{
-			results1.value := results[1],   results2.value := results[2],  results3.value := results[3]
+			if results.Has(1)
+				results1.value := results[1]
+			if results.Has(2)
+				results2.value := results[2]
+			if results.Has(3)
+				results3.value := results[3]
 		}
 		FileDelete(A_ScriptDir "\results.txt")
 		try {
