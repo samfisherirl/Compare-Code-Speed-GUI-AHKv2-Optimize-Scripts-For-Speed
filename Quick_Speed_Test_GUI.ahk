@@ -2,12 +2,15 @@
 #Requires Autohotkey v2
 #SingleInstance Force
 
-temp := A_ScriptDir "\code_to_run.ahk"
+logDir := A_MyDocuments "\ahk_log\"
+if !FileExist(logDir)
+	DirCreate(logDir)
+temp := logDir "code_to_run.ahk"
+logger := logDir "log.txt"
 ahk := A_AhkPath
-tester := constructGUI()
-; temp := A_Temp "\code_to_run.ahk"
 
-;indentation 
+tester := constructGUI()
+get()	
 
 Tab::
 {
@@ -19,6 +22,7 @@ Tab::
 
 constructGUI()
 {
+	global tester
 	w := 550
 	h := 550
 	tester := Gui()
@@ -27,12 +31,13 @@ constructGUI()
 	tester.BackColor := "232b2b"
 	T := tester.Add("Tab3", "x20 y8 w" w - 40 " h" h - (h / 3), ["Code 1", "Code 2", "Code 3"])
 	tabH := h - (h / 3) - 55
+	tester.ctrls := {}
 	T.UseTab(1)
-	code1 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
+	tester.ctrls.code1 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab(2)
-	code2 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
+	tester.ctrls.code2 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab(3)
-	code3 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
+	tester.ctrls.code3 := tester.Add("Edit", "x32 y48 w" w - 65 " h" tabH)
 	T.UseTab()
 	resultsY := Round(16 + (h - Round(h / 3)))
 	resultsw := Round((w - (w / 3))) -20
@@ -58,14 +63,15 @@ constructGUI()
 	
 	runbtn_click(*)
 	{
-		FileOpen(A_MyDocuments "\log.txt", "w").Write(code1.value "&&&&&" code2.value "&&&&&" code3.value)
-		try{
-			FileOpen(temp, "w").Write(FileContents(code1.value, code2.value, code3.value, Round(loops.value / 2)))
+		global logDir
+		FileOpen(Logger, "w").Write(tester.ctrls.code1.value "&&&&&" tester.ctrls.code2.value "&&&&&" tester.ctrls.code3.value)
+	 
+			FileOpen(temp, "w").Write(FileContents(tester.ctrls.code1.value, tester.ctrls.code2.value, tester.ctrls.code3.value, Round(loops.value / 2)))
 			Run(ahk ' "' temp '"')
-		} 
-		while not (FileExist(A_ScriptDir "\results.txt"))
+	 
+		while not (FileExist(logDir "results.txt"))
 			Sleep 5
-		contents := FileOpen(A_ScriptDir "\results.txt", "r").Read()
+		contents := FileOpen(logDir "results.txt", "r").Read()
 		results := StrSplit(contents, "&&&" )
 		{
 			if results.Has(1)
@@ -76,13 +82,13 @@ constructGUI()
 				results3.value := results[3]
 		}
 		try {
-		    FileDelete(A_ScriptDir "\results.txt")
+		    FileDelete(logDir "results.txt")
 			FileDelete(temp)
 		}
 	}
 	clear_click(*)
 	{
-		code1.value := "", code2.value := "", code3.value := ""
+		tester.ctrls.code1.value := "", tester.ctrls.code2.value := "", tester.ctrls.code3.value := ""
 	}
 	
 	FileContents(c1, c2, c3, loops)
@@ -172,18 +178,19 @@ blackGuiCtrl(params*)
 
 get()
 {
-	global tester
-	contents := FileOpen(A_MyDocuments "\log.txt", "r").Read()
+	global tester, logger
+	if !FileExist(logger)
+		return
+	contents := FileOpen(Logger, "r").Read()
 	results := StrSplit(contents, "&&&&&")
 	{
 		if results.Has(1)
-			tester.code1.value := results[1]
+			tester.ctrls.code1.value := results[1]
 		if results.Has(2)
-			tester.code2.value := results[2]
+			tester.ctrls.code2.value := results[2]
 		if results.Has(3)
-			tester.code3.value := results[3]
+			tester.ctrls.code3.value := results[3]
 	}
-	FileDelete(A_MyDocuments "\log.txt")
 	try {
 		FileDelete(temp)
 	}
