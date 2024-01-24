@@ -102,7 +102,8 @@ constructGUI()
 QPC(1)
 r1 := "", r2 := "", r3 := ""
 f1()
-test1 := QPC(0), QPC(1)
+test1 := QPC(0)
+QPC(1)
 
 )"
 txt.= (c2 = "") ? "`n" 
