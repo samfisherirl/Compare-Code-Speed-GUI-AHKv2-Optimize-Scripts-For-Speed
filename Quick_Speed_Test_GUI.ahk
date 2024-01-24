@@ -63,13 +63,12 @@ constructGUI()
 	
 	runbtn_click(*)
 	{
-		global logDir
+		global logDir, temp
 		FileOpen(Logger, "w").Write(tester.ctrls.code1.value "&&&&&" tester.ctrls.code2.value "&&&&&" tester.ctrls.code3.value)
-	 
-			FileOpen(temp, "w").Write(FileContents(tester.ctrls.code1.value, tester.ctrls.code2.value, tester.ctrls.code3.value, Round(loops.value / 2)))
-			Run(ahk ' "' temp '"')
-	 
-		while not (FileExist(logDir "results.txt"))
+		FileOpen(temp, "w").Write(FileContents(tester.ctrls.code1.value, tester.ctrls.code2.value, tester.ctrls.code3.value, Round(loops.value / 2)))
+	    FileOpen(logDir "results.txt", "w").Write("")
+		Run(ahk ' "' temp '"')
+		while (Format("{}",FileOpen(logDir "results.txt","r").Read()) = "")
 			Sleep 5
 		contents := FileOpen(logDir "results.txt", "r").Read()
 		results := StrSplit(contents, "&&&" )
@@ -84,6 +83,8 @@ constructGUI()
 		try {
 		    FileDelete(logDir "results.txt")
 			FileDelete(temp)
+		} catch as e {
+			FileOpen(logDir "results.txt", "w").Write("")
 		}
 	}
 	clear_click(*)
@@ -105,14 +106,14 @@ test1 := QPC(0), QPC(1)
 
 )"
 txt.= (c2 = "") ? "`n" 
-	: " `nf2()`ntest2 := QPC(0), QPC(1)"
+	: " `nf2()`ntest2 := QPC(0)`nQPC(1)"
 txt .= (c3 = "") ? "`n"
-: " `n`nf3()`ntest3 := QPC(0),`nQPC(1)`nf3()`ntest4 := QPC(0), QPC(1)`n" 
+: " `n`nf3()`ntest3 := QPC(0)`nQPC(1)`nf3()`ntest4 := QPC(0)`nQPC(1)`n"
 txt.= (c2 = "") ? ""
 : "
 (
 f2()
-test5 := QPC(0), QPC(1)
+test5 := QPC(0)`nQPC(1)
 )"
 txt .= "
 (
