@@ -17,7 +17,8 @@ Tab::
 	if WinActive("ahk_id " tester.hWnd) {
 		Loop 4
 			SendInput "{Space}"
-		return
+	else
+	    Send "{Blind}{Tab}"
 } }
 
 constructGUI()
@@ -99,8 +100,8 @@ constructGUI()
 (
 #SingleInstance Force
 #Requires Autohotkey v2
-QPC(1)
 r1 := "", r2 := "", r3 := ""
+QPC(1)
 f1()
 test1 := QPC(0)
 QPC(1)
@@ -109,7 +110,7 @@ QPC(1)
 txt.= (c2 = "") ? "`n" 
 	: " `nf2()`ntest2 := QPC(0)`nQPC(1)"
 txt .= (c3 = "") ? "`n"
-: " `n`nf3()`ntest3 := QPC(0)`nQPC(1)`nf3()`ntest4 := QPC(0)`nQPC(1)`n"
+: " `nf3()`ntest3 := QPC(0)`nQPC(1)`nf3()`ntest4 := QPC(0)`nQPC(1)`n"
 txt.= (c2 = "") ? ""
 : "
 (
@@ -121,7 +122,6 @@ txt .= "
 
 f1()
 test6 := QPC(0)
-
 r1 := (test6+test1)/2`n
 )"
 txt .= (c2 = "") ? "`n" : "r2:= (test2+test5)/2`n"
@@ -140,23 +140,32 @@ QPC(R := 0)
 f1()
 {
 
-	
-)" "Loop " loops "`n{`n" c1 "`n}`n" "`n}`n"
+)" "Loop " loops "`n{`n`t" indent(c1) "`n}`n" "`n}`n"
 txt .= (c2 = "") ? "`n" 
-: "`nf2()`n{`n" "Loop " loops "`n{`n" c2 "`n}`n" "`n}`n"  
+: "`nf2()`n{`n" "Loop " loops "`n{`n" indent(c2) "`n}`n" "`n}`n"  
 txt .= (c3 = "") ? "`n" 
-: "f3()`n{`n" "Loop " loops "`n{`n" c3 "`n}`n" "`n}`n"
+: "f3()`n{`n" "Loop " loops "`n{`n" indent(c2) "`n}`n" "`n}`n"
 txt.= "
 (
 	out()
 	{
-	FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&' r2 '&&&' r3)`n
+	    FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&' r2 '&&&' r3)`n
 	}
 	
 )"
 	return txt
 	}
 	return tester
+}
+
+indent(str)
+{
+	str2 := ""
+	loop parse, str, "`n" "`r"
+	{
+		str2 .= "`t" A_LoopField "`n"
+	}
+	return str2
 }
 
 blackGuiCtrl(params*)
@@ -195,6 +204,9 @@ get()
 	}
 	try {
 		FileDelete(temp)
+	} catch as e 
+	{
+		Msgbox e.message
 	}
 
 }
