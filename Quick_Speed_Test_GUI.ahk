@@ -10,22 +10,6 @@ temp := logDir "code_to_run.ahk", logger := logDir "log.txt", userLog := logDir 
 tester := constructGUI()
 get()
 
-; ~Tab::
-; {
-; 	if WinActive("ahk_id " tester.hWnd)
-; 	{
-; 		Loop 4
-; 			SendInput "{Space}"
-; 	}
-; 	else
-; 	{
-; 		SendInput("{Tab}")
-; 		try
-; 		{
-; 			title := WinGetTitle("A")
-; 		}
-; 	}
-; }
 
 constructGUI()
 {
