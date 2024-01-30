@@ -12,13 +12,13 @@ ahk := A_AhkPath
 tester := constructGUI()
 get()	
 
-Tab::
+~Tab::
 {
 	if WinActive("ahk_id " tester.hWnd) {
 		Loop 4
 			SendInput "{Space}"
 	else
-	    Send "{Blind}{Tab}"
+	    SendInput "{Tab}"
 } }
 
 constructGUI()
@@ -140,32 +140,23 @@ QPC(R := 0)
 f1()
 {
 
-)" "Loop " loops "`n{`n`t" indent(c1) "`n}`n" "`n}`n"
+	
+)" "Loop " loops "`n{`n" c1 "`n}`n" "`n}`n"
 txt .= (c2 = "") ? "`n" 
-: "`nf2()`n{`n" "Loop " loops "`n{`n" indent(c2) "`n}`n" "`n}`n"  
+: "`nf2()`n{`n" "Loop " loops "`n{`n" c2 "`n}`n" "`n}`n"  
 txt .= (c3 = "") ? "`n" 
-: "f3()`n{`n" "Loop " loops "`n{`n" indent(c2) "`n}`n" "`n}`n"
+: "f3()`n{`n" "Loop " loops "`n{`n" c3 "`n}`n" "`n}`n"
 txt.= "
 (
 	out()
 	{
-	    FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&' r2 '&&&' r3)`n
+	FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&' r2 '&&&' r3)`n
 	}
 	
 )"
 	return txt
 	}
 	return tester
-}
-
-indent(str)
-{
-	str2 := ""
-	loop parse, str, "`n" "`r"
-	{
-		str2 .= "`t" A_LoopField "`n"
-	}
-	return str2
 }
 
 blackGuiCtrl(params*)
@@ -202,6 +193,7 @@ get()
 		if results.Has(3)
 			tester.ctrls.code3.value := results[3]
 	}
+	if FileExist(temp)
 	try {
 		FileDelete(temp)
 	} catch as e 
