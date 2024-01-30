@@ -10,7 +10,6 @@ temp := logDir "code_to_run.ahk", logger := logDir "log.txt", userLog := logDir 
 tester := constructGUI()
 get()
 
-
 constructGUI()
 {
 	global tester, loops
@@ -203,7 +202,7 @@ get()
 		if results.Has(4)
 			tester.ctrls.code3.value := results[4]
 		if results.Has(5)
-			loops.value := results[5]
+			loops.value := (results[5] > 5000) ? 5000 : results[5]
 	}
 	if FileExist(temp)
 		try {
