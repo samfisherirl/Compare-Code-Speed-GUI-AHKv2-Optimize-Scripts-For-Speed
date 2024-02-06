@@ -57,7 +57,7 @@ Loop 1000000
     if x
         continue
 }
-test3 := QPC(0)
+test3 := QPC(0), QPC(1)
 
 
 Loop 1000000
@@ -65,7 +65,7 @@ Loop 1000000
     if x = true
         continue
 }
-test4 := QPC(0)
+test4 := QPC(0), QPC(1)
 
 Loop 1000000
 {
