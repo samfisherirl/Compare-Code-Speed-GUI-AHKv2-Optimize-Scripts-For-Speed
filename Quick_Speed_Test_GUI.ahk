@@ -8,7 +8,7 @@ if !FileExist(logDir)
 temp := logDir "code_to_run.ahk", logger := logDir "log.txt", userLog := logDir "userlog.txt", ahk := A_AhkPath, title := "AHKv2 Quick Speed Test"
 
 tester := constructGUI()
-get()
+load()
 
 constructGUI()
 {
@@ -187,7 +187,7 @@ blackGuiCtrl(params*)
 	}
 }
 
-get()
+load()
 {
 	global tester, logger, loops
 	if !FileExist(logger)
@@ -236,7 +236,5 @@ darkMode(myGUI, color?)
 			continue
 		blackGuiCtrl(myGUI[ctrlHWND])
 	}
-	;else
-	;SetExplorerTheme(LV1.hWnd), SetExplorerTheme(LV2.hWnd)
 
 }
