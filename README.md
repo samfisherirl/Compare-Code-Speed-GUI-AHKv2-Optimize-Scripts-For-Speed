@@ -1,4 +1,4 @@
-# Compare-Code-Speed-AHKv2
+# Optimize AHKv2 for speed
 Optimize AHKv2 Code for Speed
 ![image](https://github.com/samfisherirl/Compare-Code-Speed-AHKv2/assets/98753696/9c25c281-e2b4-44d6-8945-e971fad7e334)
 
