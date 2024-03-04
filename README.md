@@ -21,27 +21,35 @@ tests include:
 
 
 Commas and Combined lines aren't faster in v2; with caveats.
-v2 Guide / Tutorial
+============================================================
+
+![](https://www.redditstatic.com/desktop2x/img/renderTimingPixel.png)
+
+[v2 Guide / Tutorial](https://www.reddit.com/r/AutoHotkey/search?q=flair_name%3A%22v2%20Guide%20%2F%20Tutorial%22&restrict_sr=1)
+
 Over the course of 3 months, I've learned some optimization tricks. After a deeper dive and some reflection, I've found I had some misconceptions on their transient ability in moving to AHKv2. I noticed a lot of this syntax in experienced community members' scripts, including mine, and I want to share what I've found.
 
-If you have tricks or tips for faster code in ahkv2, please share. Always excited to learn and share.
+-   If you have tricks or tips for *faster* code in ahkv2, please share. Always excited to learn and share.
 
-All notes will come from this post regarding Optimizing ahkv1. ( and/or class libs for v2.) https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413
+-   All notes will come from this post regarding Optimizing ahkv1. ( and/or class libs for v2.) <https://www.autohotkey.com/boards/viewtopic.php?f=7&t=6413>
 
-If you want to replicate the tests, they can be found for v1 in the above post and v2 here https://github.com/samfisherirl/Compare-Code-Speed-GUI-AHKv2/tree/main/_speedTestScripts
+-   If you want to replicate the tests, they can be found for v1 in the above post and v2 here <https://github.com/samfisherirl/Compare-Code-Speed-GUI-AHKv2/tree/main/_speedTestScripts>
 
-None of this post describes results outside the bounds of the tests. There are use cases that are faster in v2 with combined lines, just a bit of hyperbole in the title.
+-   None of this post describes results outside the bounds of the tests. There are use cases that are faster in v2 with combined lines, just a bit of hyperbole in the title.
 
-My tool for testing is DLLCall query counter
+-   My tool for testing is DLLCall query counter
 
-all functions get run 55000 times, and a few reruns for insurance.
+-   all functions get run 55000 times, and a few reruns for insurance.
 
-https://github.com/samfisherirl/Compare-Code-Speed-GUI-AHKv2
+<https://github.com/samfisherirl/Compare-Code-Speed-GUI-AHKv2>
 
 The tests
+
 Defining variables by lines and commas
+
 tests are shortened for brevity
 
+```
 ;test 1
 t1a := 1
 t1b := 1
@@ -53,25 +61,38 @@ t1d := 1
 
 ;test3
 t3a := 1, t3b := 1, t3c := 1, t3d := 1
+
+```
+
 AHKv1 results =
 
+```
 	;test1 0.240315
 
 	;test2 0.132753
 
 	;test3 0.168953
+
+```
+
 ahkv2 results =
 
+```
 	 ;test1 0.00124844 (50% + faster)
 
 	;test2 0.00259254
 
 	;test3 0.00274485
+
+```
+
 We can see combining variables on a single line in these examples are no longer faster but hamper the code. We'll find out this is different with function calls.
 
 Let's do it again with functions
+
 these functions are across all tests ; condensed
 
+```
 	e() {   y := 999*222
 	   return y }
 
@@ -79,43 +100,70 @@ these functions are across all tests ; condensed
 	   return y }
 	g() {   y := 999*222
 	   return y }
+
+```
+
 test1
 
+```
 	a := e()
 	b := f()
 	c := g()
+
+```
+
 test2
 
+```
 a := e(),b := f(),c := g()
+
+```
+
 test3
 
+```
     a := e()
 ,b := f()
 ,c := g()
+
+```
+
 results
 
+```
 	;test1 0.01627 (50% slower)
 	;test2 0.01098
 	;test3 0.011008
+
+```
+
 Even shortened conditionals aren't faster with combined lines
+
 ;test1
 
+```
 x := true
 
 if x
    z:=1, a:=2, b:=1, c:=2
+
+```
+
 ;test2
 
+```
 	x := true
 
 	if x
-	{ 
+	{
 	   z:=1
 	   a:=2
 	   b:=1
 	   c:=2
 	}
-test1 0.0026
 
-test2 0.00180 ;30% faster
+```
 
+-   test1 0.0026
+
+-   test2 0.00180 ;30% faster
