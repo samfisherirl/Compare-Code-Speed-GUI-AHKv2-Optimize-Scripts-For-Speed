@@ -12,7 +12,7 @@ tester := constructGUI()
 try load()
 constructGUI()
 {
-	global tester, loops
+	global tester, loops, code1, code2, code3
 	w := 550
 	h := 550
 	tester := {}
@@ -25,16 +25,16 @@ constructGUI()
 	tabH := h - (h / 3) - 55
 	tester.ctrls := {}
 	T.UseTab(1)
-
-	tester.ctrls.code1 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " r13 +Wrap")
+	
+	code1 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " r13 +Wrap")
 	T.UseTab(2)
-	tester.ctrls.code2 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " +Wrap")
+	code2 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " +Wrap")
 	T.UseTab(3)
-	tester.ctrls.code3 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " +Wrap")
+	code3 := RichCode(tester, settings(), "x32 y48 w" w - 65 " h" tabH " +Wrap")
 	T.UseTab()
-	tester.ctrls.code1.SetFont("s11")
-	tester.ctrls.code2.SetFont("s11")
-	tester.ctrls.code3.SetFont("s11")
+	code1.SetFont("s11")
+	code2.SetFont("s11")
+	code3.SetFont("s11")
 	resultsY := Round(16 + (h - Round(h / 3)))
 	resultsw := Round((w - (w / 3))) - 20
 	tester.Add("GroupBox", "x20 y" resultsY " w" w - 40 " h222", "Results")
@@ -64,10 +64,10 @@ constructGUI()
 	runbtn_click(*)
 	{
 		global logDir, temp, userLog
-		FileOpen(Logger, "w").Write("&&&&&" tester.ctrls.code1.value "&&&&&"
-			. tester.ctrls.code2.value "&&&&&" tester.ctrls.code3.value
-			. "&&&&&" loops.value "&&&&&")
-		FileOpen(temp, "w").Write(FileContents(tester.ctrls.code1.value, tester.ctrls.code2.value, tester.ctrls.code3.value, Round(loops.value / 2)))
+		FileOpen(Logger, "w").Write("&&&&&&" code1.Text "&&&&&&"
+			. code2.Text "&&&&&&" code3.Text
+			. "&&&&&&" loops.Value "&&&&&&")
+		FileOpen(temp, "w").Write(FileContents(code1.Text, code2.Text, code3.Text, Round(loops.Value / 2)))
 		FileOpen(logDir "results.txt", "w").Write("")
 		Run(ahk ' "' temp '"',,,&PID)
 		while (Format("{}", FileOpen(logDir "results.txt", "r").Read()) = "")
@@ -76,14 +76,14 @@ constructGUI()
 			else 
 				Sleep(100)
 		contents := FileOpen(logDir "results.txt", "r").Read()
-		results := StrSplit(contents, "&&&")
+		results := StrSplit(contents, "&&&&&&")
 		{
 			if results.Has(1)
-				results1.value := results[1]
+				results1.Value := results[1]
 			if results.Has(2)
-				results2.value := results[2]
+				results2.Value := results[2]
 			if results.Has(3)
-				results3.value := results[3]
+				results3.Value := results[3]
 		}
 		if FileExist(userLog)
 		{
@@ -93,9 +93,9 @@ constructGUI()
 		}
 
 		FileOpen(userLog, "w").Write("`n@@@@@@@@@@@@@@@@@@@@@@"
-			. "`n"   A_MM "-" A_DD "-" A_YYYY " " A_Hour ":" A_Min ":" A_Sec "`n" tester.ctrls.code1.value "`nresults: " results1.value "`n`n"
-			. tester.ctrls.code2.value "`nresults: " results2.value "`n" tester.ctrls.code3.value
-			. "`nresults: " results3.value "`nloops:" loops.value "`n" contents)
+			. "`n"   A_MM "-" A_DD "-" A_YYYY " " A_Hour ":" A_Min ":" A_Sec "`n" code1.Text "`nresults: " results1.Value "`n`n"
+			. code2.Text "`nresults: " results2.Value "`n" code3.Text
+			. "`nresults: " results3.Value "`nloops:" loops.Value "`n" contents)
 		try {
 			FileDelete(logDir "results.txt")
 			FileDelete(temp)
@@ -110,7 +110,8 @@ constructGUI()
 	}
 	clear_click(*)
 	{
-		tester.ctrls.code1.value := "", tester.ctrls.code2.value := "", tester.ctrls.code3.value := ""
+		global code1, code2, code3
+		code1.Text := "", code2.Text := "", code3.Text := ""
 	}
 
 	FileContents(c1, c2, c3, loops)
@@ -145,8 +146,7 @@ test6 := QPC(0)
 r1 := (test6+test1)/2`n
 )"
 		txt .= (c2 = "") ? "`n" : "r2:= (test2+test5)/2`n"
-		txt .= (c3 = "") ? "`n"
-			: "r3 := (test3+test4)/2`n"
+		txt .= (c3 = "") ? "`n" : "r3 := (test3+test4)/2`n"
 		txt .= "
 (
 out()
@@ -162,15 +162,13 @@ f1()
 
 	
 )" "Loop " loops "`n{`n" c1 "`n}`n" "`n}`n"
-		txt .= (c2 = "") ? "`n"
-			: "`nf2()`n{`n" "Loop " loops "`n{`n" c2 "`n}`n" "`n}`n"
-		txt .= (c3 = "") ? "`n"
-			: "f3()`n{`n" "Loop " loops "`n{`n" c3 "`n}`n" "`n}`n"
+		txt .= (c2 = "") ? "`n" : "`nf2()`n{`n" "Loop " loops "`n{`n" c2 "`n}`n" "`n}`n"
+		txt .= (c3 = "") ? "`n" : "f3()`n{`n" "Loop " loops "`n{`n" c3 "`n}`n" "`n}`n"
 		txt .= "
 (
 	out()
 	{
-	FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&' r2 '&&&' r3)`n
+	FileOpen(A_ScriptDir "\results.txt", "w").Write(r1 '&&&&&&' r2 '&&&&&&' r3)`n
 	}
 	
 )"
@@ -249,16 +247,16 @@ load()
 	if !FileExist(logger)
 		return
 	contents := FileOpen(Logger, "r").Read()
-	results := StrSplit(contents, "&&&&&")
+	results := StrSplit(contents, "&&&&&&")
 	{
 		if results.Has(2)
-			tester.ctrls.code1.value := results[2]
+			code1.Text := results[2]
 		if results.Has(3)
-			tester.ctrls.code2.value := results[3]
+			code2.Text := results[3]
 		if results.Has(4)
-			tester.ctrls.code3.value := results[4]
+			code3.Text := results[4]
 		if results.Has(5)
-			loops.value := (results[5] > 5000) ? 5000 : results[5]
+			loops.Value := (results[5] > 5000) ? 5000 : results[5]
 	}
 	if FileExist(temp)
 		try {
@@ -614,7 +612,7 @@ class RichCode
 
 	; --- Methods ---
 
-	; First parameter is taken as a replacement value
+	; First parameter is taken as a replacement Value
 	; Variadic form is used to detect when a parameter is given,
 	; regardless of content
 	Highlight(NewVal := unset)
