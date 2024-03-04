@@ -60,7 +60,8 @@ constructGUI()
 		
 	rc := RichCode(tester, settings(), "xm w640 h470")
 	tester.Show("w" w " h" h + 70)
-	
+		
+
 	runbtn_click(*)
 	{
 		global logDir, temp, userLog
@@ -325,7 +326,27 @@ darkMode(myGUI, color?)
 			, 0xRRGGBB
 			, 0xRRGGBB,
 			, 0xRRGGBB]})
-*/
+		*/
+Settimer getFocus, 100
+
+getFocus(){
+	global code1, code2, code3, focus
+	try fc := ControlGetFocus("ahk_id" A_ScriptHwnd)
+	if IsSet(fc) && (fc = code1.hwnd || fc != code2.hwnd || fc || code3.hwnd)
+		focus := true
+	else
+		focus := false
+}
+
+#HotIf focus = true
+Tab::
+{
+	Loop 3
+	{
+		SendInput '{Tab}'
+	}
+}
+
 
 class RichCode
 {
