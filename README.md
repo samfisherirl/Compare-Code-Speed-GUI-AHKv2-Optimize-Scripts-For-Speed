@@ -51,7 +51,7 @@ Defining variables by lines and commas
 
 tests are shortened for brevity
 
-```
+```ahk
 ;test 1
 t1a := 1
 t1b := 1
@@ -68,7 +68,7 @@ t3a := 1, t3b := 1, t3c := 1, t3d := 1
 
 AHKv1 results =
 
-```
+```ahk
 	;test1 0.240315
 
 	;test2 0.132753
@@ -79,7 +79,7 @@ AHKv1 results =
 
 ahkv2 results =
 
-```
+```ahk
 	 ;test1 0.00124844 (50% + faster)
 
 	;test2 0.00259254
@@ -94,7 +94,7 @@ Let's do it again with functions
 
 these functions are across all tests ; condensed
 
-```
+```ahk
 	e() {   y := 999*222
 	   return y }
 
@@ -107,7 +107,7 @@ these functions are across all tests ; condensed
 
 test1
 
-```
+```ahk
 	a := e()
 	b := f()
 	c := g()
@@ -116,14 +116,14 @@ test1
 
 test2
 
-```
+```ahk
 a := e(),b := f(),c := g()
 
 ```
 
 test3
 
-```
+```ahk
     a := e()
 ,b := f()
 ,c := g()
@@ -132,7 +132,7 @@ test3
 
 results
 
-```
+```ahk
 	;test1 0.01627 (50% slower)
 	;test2 0.01098
 	;test3 0.011008
@@ -143,7 +143,7 @@ Even shortened conditionals aren't faster with combined lines
 
 ;test1
 
-```
+```ahk
 x := true
 
 if x
@@ -153,7 +153,7 @@ if x
 
 ;test2
 
-```
+```ahk
 	x := true
 
 	if x
